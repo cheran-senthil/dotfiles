@@ -1,5 +1,6 @@
-export PROTOCOL_DIR=/Users/cheran/Documents/git/github.com/AudiusProject/audius-protocol
 export EDITOR=code
+
+export PROTOCOL_DIR=/Users/cheran/Documents/git/github.com/AudiusProject/audius-protocol
 export GOPATH=$(/usr/local/bin/go env GOPATH)
 export GOPRIVATE="github.com/AudiusProject"
 
