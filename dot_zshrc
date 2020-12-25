@@ -1,0 +1,115 @@
+# Environment Variables {{{
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+
+# ZLE_RPROMPT_INDENT=0
+ZSH_DISABLE_COMPFIX=true
+
+declare -A ZINIT
+ZINIT[HOME_DIR]=$HOME/.zinit
+ZINIT[BIN_DIR]=${ZINIT[HOME_DIR]}/bin
+# }}}
+
+# zsh Options {{{
+setopt autocd extendedglob notify
+unsetopt beep
+
+bindkey -e
+# }}}
+
+# Setup zdharma/zinit {{{
+if [[ ! -f ${ZINIT[BIN_DIR]}/zinit.zsh ]]; then
+  print -P "%F{220}Installing Plugin Manager (zdharma/zinit)...%f"
+  mkdir -m g-rwX -p "${ZINIT[HOME_DIR]}"
+  git clone https://github.com/zdharma/zinit "${ZINIT[BIN_DIR]}" && \
+    print -P "%F{34}Installation successful.%f%b" || \
+    print -P "%F{160}The clone has failed.%f%b"
+fi
+
+source "${ZINIT[BIN_DIR]}/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+# }}}
+
+# Load Plugins {{{
+zinit light romkatv/powerlevel10k
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light lukechilds/zsh-nvm
+# }}}
+
+# Setup compsys {{{
+zstyle ':completion:*' completer _expand _complete _ignored
+zstyle ':completion:*' insert-unambiguous true
+
+autoload -Uz compinit
+compinit -u
+# }}}
+
+# Aliases {{{
+
+## Modified commands
+alias diff='colordiff'              # requires colordiff package
+alias grep='grep --color=auto'
+alias df='df -h'
+alias du='du -c -h'
+alias mkdir='mkdir -p -v'
+alias nano='nano -w'
+alias ping='ping -c 5'
+alias dmesg='dmesg -HL'
+
+## New commands
+alias da='date "+%A, %B %d, %Y [%T]"'
+alias du1='du --max-depth=1'
+alias hist='history | grep'         # requires an argument
+alias openports='ss --all --numeric --processes --ipv4 --ipv6'
+alias pgg='ps -Af | grep'           # requires an argument
+alias ..='cd ..'
+
+# Privileged access
+if (( UID != 0 )); then
+    alias sudo='sudo '
+    alias scat='sudo cat'
+    alias svim='sudoedit'
+    alias root='sudo -i'
+    alias reboot='sudo systemctl reboot'
+    alias poweroff='sudo systemctl poweroff'
+    alias netctl='sudo netctl'
+fi
+
+## ls
+alias ls='ls -hF'
+alias lr='ls -R'                    # recursive ls
+alias ll='ls -l'
+alias la='ll -A'
+alias lx='ll -BX'                   # sort by extension
+alias lz='ll -rS'                   # sort by size
+alias lt='ll -rt'                   # sort by date
+alias lm='la | more'
+
+## Safety features
+alias cls=' echo -ne "\033c"'       # clear screen for real (it does not work in Terminology)
+
+## User aliases
+alias reboot='shutdown -r'
+alias history='history 1'
+alias vi='nvim'
+alias top='htop'
+alias gcc='gcc-10'
+alias g++='g++-10'
+alias python2=`which python`
+alias python=`which python3`
+alias pip='python -m pip'
+alias k='kubectl'
+alias firefox='open -a Firefox\ Developer\ Edition'
+alias chrome='open -a Google\ Chrome'
+
+# Audius aliases
+alias audius/audius-protocol='cd ~/Documents/git/github.com/AudiusProject/audius-protocol'
+alias audius/audius-client='cd ~/Documents/git/github.com/AudiusProject/audius-client'
+alias audius/audius-k8s='cd ~/Documents/git/github.com/AudiusProject/audius-k8s'
+alias audius/audius-k8s-manifests='cd ~/Documents/git/github.com/AudiusProject/audius-k8s-manifests'
+
+# }}}
+
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
