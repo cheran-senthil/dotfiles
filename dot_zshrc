@@ -91,18 +91,14 @@ alias lm='la | more'
 alias cls=' echo -ne "\033c"'       # clear screen for real (it does not work in Terminology)
 
 ## User aliases
-alias reboot='shutdown -r'
+alias reboot='sudo reboot'
 alias history='history 1'
 alias vi='nvim'
 alias top='htop'
-alias gcc='gcc-10'
-alias g++='g++-10'
 alias python2=`which python`
 alias python=`which python3`
 alias pip='python -m pip'
 alias k='kubectl'
-alias firefox='open -a Firefox\ Developer\ Edition'
-alias chrome='open -a Google\ Chrome'
 
 # Audius aliases
 alias audius/audius-protocol='cd ~/Documents/git/github.com/AudiusProject/audius-protocol'

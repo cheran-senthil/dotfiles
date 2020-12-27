@@ -1,10 +1,11 @@
+export TERMINAL=kitty
 export EDITOR=code
 
-export PROTOCOL_DIR=/Users/cheran/Documents/git/github.com/AudiusProject/audius-protocol
-export GOPATH=$(/usr/local/bin/go env GOPATH)
+export PROTOCOL_DIR=/home/cheran/Documents/git/github.com/AudiusProject/audius-protocol
+export GOPATH=$(go env GOPATH)
 export GOPRIVATE="github.com/AudiusProject"
 
 typeset -U PATH path
-path=("$HOME/.local/bin" "$HOME/bin" "$GOPATH/bin" "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/" "/usr/local/Cellar/helm@2/2.17.0/bin" "$path[@]")
+path=("$HOME/.local/bin" "$HOME/bin" "/snap/bin" "$GOPATH/bin" "$path[@]")
 
 export PATH
