@@ -12,19 +12,24 @@ ZINIT[BIN_DIR]=${ZINIT[HOME_DIR]}/bin
 # }}}
 
 # zsh Options {{{
-setopt autocd extendedglob notify
-unsetopt beep
+setopt autocd
+setopt beep
+setopt extendedglob
+setopt hist_ignore_all_dups
+setopt interactivecomments
+setopt nomatch
+setopt notify
 
 bindkey -e
 # }}}
 
 # Setup zdharma/zinit {{{
 if [[ ! -f ${ZINIT[BIN_DIR]}/zinit.zsh ]]; then
-  print -P "%F{220}Installing Plugin Manager (zdharma/zinit)...%f"
-  mkdir -m g-rwX -p "${ZINIT[HOME_DIR]}"
-  git clone https://github.com/zdharma/zinit "${ZINIT[BIN_DIR]}" && \
-    print -P "%F{34}Installation successful.%f%b" || \
-    print -P "%F{160}The clone has failed.%f%b"
+   print -P "%F{220}Installing Plugin Manager (zdharma/zinit)...%f"
+   mkdir -m g-rwX -p "${ZINIT[HOME_DIR]}"
+   git clone https://github.com/zdharma/zinit "${ZINIT[BIN_DIR]}" && \
+     print -P "%F{34}Installation successful.%f%b" || \
+     print -P "%F{160}The clone has failed.%f%b"
 fi
 
 source "${ZINIT[BIN_DIR]}/zinit.zsh"
@@ -33,17 +38,32 @@ autoload -Uz _zinit
 # }}}
 
 # Load Plugins {{{
+zinit ice depth=1
+
 zinit light romkatv/powerlevel10k
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light lukechilds/zsh-nvm
+
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 # }}}
 
-# Setup compsys {{{
-zstyle ':completion:*' completer _expand _complete _ignored
+# Plugin Config {{{
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+# }}}
+
+# Setup completion {{{
+zstyle ':completion:*' completer _expand _complete _ignored _prefix
+zstyle ':completion:*' expand prefix
 zstyle ':completion:*' insert-unambiguous true
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-suffixes true
 
 autoload -Uz compinit
 compinit -u
+
+zinit cdreplay
 # }}}
 
 # Aliases {{{
@@ -91,14 +111,20 @@ alias lm='la | more'
 alias cls=' echo -ne "\033c"'       # clear screen for real (it does not work in Terminology)
 
 ## User aliases
-alias reboot='sudo reboot'
 alias history='history 1'
 alias vi='nvim'
 alias top='htop'
-alias python2=`which python`
-alias python=`which python3`
+alias python='python3'
+alias python2='pypy'
 alias pip='python -m pip'
 alias k='kubectl'
+
+if [[ $(uname) = "Darwin" ]]; then
+    alias gcc='gcc-10'
+    alias g++='g++-10'
+    alias firefox='open -a Firefox'
+    alias chrome='open -a Chrome'
+fi
 
 # Audius aliases
 alias audius/audius-protocol='cd ~/Documents/git/github.com/AudiusProject/audius-protocol'
@@ -107,5 +133,3 @@ alias audius/audius-k8s='cd ~/Documents/git/github.com/AudiusProject/audius-k8s'
 alias audius/audius-k8s-manifests='cd ~/Documents/git/github.com/AudiusProject/audius-k8s-manifests'
 
 # }}}
-
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

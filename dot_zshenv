@@ -1,11 +1,24 @@
-export TERMINAL=kitty
-export EDITOR=code
+ZDOTDIR=$HOME
 
-export PROTOCOL_DIR=/home/cheran/Documents/git/github.com/AudiusProject/audius-protocol
-export GOPATH=$(go env GOPATH)
+declare -A ZINIT
+ZINIT[HOME_DIR]=$HOME/.zinit
+ZINIT[BIN_DIR]=${ZINIT[HOME_DIR]}/bin
+
+export EDITOR=code
+export VISUAL=code
+
 export GOPRIVATE="github.com/AudiusProject"
 
+export PROTOCOL_DIR=$HOME/cheran/Documents/git/github.com/AudiusProject/audius-protocol
+export AUDIUS_REMOTE_DEV_HOST=192.168.3.2
+
 typeset -U PATH path
-path=("$HOME/.local/bin" "$HOME/bin" "/snap/bin" "$GOPATH/bin" "$path[@]")
+path=(
+    "$HOME/bin"
+    "$HOME/.local/bin"
+    "$HOME/go/bin"
+    "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin/"
+    "$path[@]"
+)
 
 export PATH

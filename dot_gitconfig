@@ -1,16 +1,15 @@
 [commit]
-	gpgsign = true
+gpgsign = true
 [url "git@github.com:"]
-    insteadOf = https://github.com/
+insteadOf = https://github.com/
 [alias]
-    branchm = "!git branch -m $2 $3 && git push $1 :$2 $3 -u #"
-    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
-    last = log -1 HEAD
-    undo = reset HEAD~1
-    unstage = reset HEAD --
-    visual = !gitk
+branchm = "!git branch -m $2 $3 && git push $1 :$2 $3 -u #"
+hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+last = log -1 HEAD
+undo = reset HEAD~1
+unstage = reset HEAD --
 [filter "gitlocal"]
-    clean = "sed -E '/.*(\\/\\/|#) gitignore$/'d | sed -E 's/.*(\\/\\/|#) gitreplace (.*)/\\2/'"
-    smudge = cat
+clean = "sed -E '/.*(\\/\\/|#) gitignore$/'d | sed -E 's/.*(\\/\\/|#) gitreplace (.*)/\\2/'"
+smudge = cat
 [pull]
-    ff = only
+ff = only
