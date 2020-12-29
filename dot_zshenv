@@ -9,7 +9,7 @@ export VISUAL=code
 
 export GOPRIVATE="github.com/AudiusProject"
 
-export PROTOCOL_DIR=$HOME/cheran/Documents/git/github.com/AudiusProject/audius-protocol
+export PROTOCOL_DIR=$HOME/Documents/git/github.com/AudiusProject/audius-protocol
 export AUDIUS_REMOTE_DEV_HOST=192.168.3.2
 
 typeset -U PATH path
