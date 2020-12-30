@@ -1,0 +1,37 @@
+#!/bin/bash
+
+function opposite() {
+    case $1 in
+    "north")
+        echo "south"
+        ;;
+    "south")
+        echo "north"
+        ;;
+    "east")
+        echo "west"
+        ;;
+    "west")
+        echo "east"
+        ;;
+    esac
+}
+
+function dirmost_window() {
+    case $1 in
+    "north")
+        yabai -m query --windows --space | jq -s ".[] | min_by(.frame.y).id"
+        ;;
+    "south")
+        yabai -m query --windows --space | jq -s ".[] | max_by(.frame.y).id"
+        ;;
+    "east")
+        yabai -m query --windows --space | jq -s ".[] | max_by(.frame.x).id"
+        ;;
+    "west")
+        yabai -m query --windows --space | jq -s ".[] | min_by(.frame.x).id"
+        ;;
+    esac
+}
+
+yabai -m window --focus $1 || $(yabai -m display --focus $1 && yabai -m window --focus $(dirmost_window $(opposite $1)))
