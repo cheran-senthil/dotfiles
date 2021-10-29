@@ -37,6 +37,12 @@ autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 # }}}
 
+# Powerlevel10k Instant Prompt {{{
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+# }}}
+
 # Load Plugins {{{
 zinit ice depth=1
 
@@ -118,6 +124,7 @@ alias python='python3'
 alias python2='pypy'
 alias pip='python -m pip'
 alias k='kubectl'
+alias gssh='gcloud compute ssh'
 
 if [[ $(uname) = "Darwin" ]]; then
     alias gcc='gcc-10'
@@ -127,9 +134,10 @@ if [[ $(uname) = "Darwin" ]]; then
 fi
 
 # Audius aliases
-alias audius/audius-protocol='cd ~/Documents/git/github.com/AudiusProject/audius-protocol'
-alias audius/audius-client='cd ~/Documents/git/github.com/AudiusProject/audius-client'
-alias audius/audius-k8s='cd ~/Documents/git/github.com/AudiusProject/audius-k8s'
-alias audius/audius-k8s-manifests='cd ~/Documents/git/github.com/AudiusProject/audius-k8s-manifests'
+for org in $HOME/Documents/git/github.com/*; do
+    for repo in $org/*; do
+        alias "$(basename $org)/$(basename $repo)=cd $repo"
+    done
+done
 
 # }}}
