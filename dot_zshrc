@@ -27,7 +27,7 @@ bindkey -e
 if [[ ! -f ${ZINIT[BIN_DIR]}/zinit.zsh ]]; then
    print -P "%F{220}Installing Plugin Manager (zdharma/zinit)...%f"
    mkdir -m g-rwX -p "${ZINIT[HOME_DIR]}"
-   git clone https://github.com/zdharma/zinit "${ZINIT[BIN_DIR]}" && \
+   git clone https://github.com/zdharma-continuum/zinit "${ZINIT[BIN_DIR]}" && \
      print -P "%F{34}Installation successful.%f%b" || \
      print -P "%F{160}The clone has failed.%f%b"
 fi
