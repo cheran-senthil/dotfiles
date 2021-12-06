@@ -127,8 +127,8 @@ alias k='kubectl'
 alias gssh='gcloud compute ssh'
 
 if [[ $(uname) = "Darwin" ]]; then
-    alias gcc='gcc-10'
-    alias g++='g++-10'
+    alias gcc='gcc-11'
+    alias g++='g++-11'
     alias firefox='open -a Firefox'
     alias chrome='open -a Chrome'
 fi
