@@ -121,16 +121,14 @@ alias history='history 1'
 alias vi='nvim'
 alias top='htop'
 alias python='python3'
-alias python2='pypy'
 alias pip='python -m pip'
-alias k='kubectl'
 alias gssh='gcloud compute ssh'
 
 if [[ $(uname) = "Darwin" ]]; then
     alias gcc='gcc-11'
     alias g++='g++-11'
     alias firefox='open -a Firefox'
-    alias chrome='open -a Chrome'
+    alias chrome='open -a Google\ Chrome'
 fi
 
 # Audius aliases
