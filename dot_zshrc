@@ -126,7 +126,7 @@ alias gssh='gcloud compute ssh'
 
 ## docker aliases
 alias docker-prune="docker rm $(docker ps --all -q -f status=dead); docker system prune; docker network prune"
-alias docker-port-nuke="sudo systemctl stop docker; sudo rm -rf /var/lib/docker/containers/*; sudo systemctl start docker"
+alias docker-port-nuke-linux="sudo systemctl stop docker; sudo rm -rf /var/lib/docker/containers/*; sudo systemctl start docker"
 
 if [[ $(uname) = "Darwin" ]]; then
     alias gcc='gcc-11'
