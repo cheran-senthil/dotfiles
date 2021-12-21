@@ -18,7 +18,7 @@ function opposite() {
 }
 
 function get_focused_window() {
-    yabai -m query --windows | jq -c '.[] | select(.focused == 1).id'
+    yabai -m query --windows | jq -c '.[] | select(."has-focus" == true).id'
 }
 
 function dirmost_window() {
