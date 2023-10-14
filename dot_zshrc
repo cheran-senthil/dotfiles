@@ -12,6 +12,7 @@ ZINIT[BIN_DIR]=${ZINIT[HOME_DIR]}/bin
 # }}}
 
 # zsh Options {{{
+setopt appendhistory
 setopt autocd
 setopt beep
 setopt extendedglob
@@ -77,65 +78,18 @@ zinit cdreplay
 ## Modified commands
 alias diff='colordiff'              # requires colordiff package
 alias grep='grep --color=auto'
-alias df='df -h'
-alias du='du -c -h'
-alias mkdir='mkdir -p -v'
-alias nano='nano -w'
-alias ping='ping -c 5'
-alias dmesg='dmesg -HL'
-
-## New commands
-alias da='date "+%A, %B %d, %Y [%T]"'
-alias du1='du --max-depth=1'
 alias hist='history | grep'         # requires an argument
-alias openports='ss --all --numeric --processes --ipv4 --ipv6'
-alias pgg='ps -Af | grep'           # requires an argument
-alias ..='cd ..'
-
-# Privileged access
-if (( UID != 0 )); then
-    alias sudo='sudo '
-    alias scat='sudo cat'
-    alias svim='sudoedit'
-    alias root='sudo -i'
-    alias reboot='sudo systemctl reboot'
-    alias poweroff='sudo systemctl poweroff'
-    alias netctl='sudo netctl'
-fi
-
-## ls
-alias ls='ls -hF'
-alias lr='ls -R'                    # recursive ls
-alias ll='ls -l'
-alias la='ll -A'
-alias lx='ll -BX'                   # sort by extension
-alias lz='ll -rS'                   # sort by size
-alias lt='ll -rt'                   # sort by date
-alias lm='la | more'
-
-## Safety features
-alias cls=' echo -ne "\033c"'       # clear screen for real (it does not work in Terminology)
 
 ## User aliases
-alias history='history 1'
 alias vi='nvim'
 alias top='htop'
 alias python='python3'
 alias pip='python -m pip'
-alias gssh='gcloud compute ssh'
 
 if [[ $(uname) = "Darwin" ]]; then
-    alias gcc='gcc-11'
-    alias g++='g++-11'
-    alias firefox='open -a Firefox'
-    alias chrome='open -a Google\ Chrome'
+    alias chromium='open -a Chromium'
 fi
 
-# Audius aliases
-for org in $HOME/Documents/git/github.com/*; do
-    for repo in $org/*; do
-        alias "$(basename $org)/$(basename $repo)=cd $repo"
-    done
-done
+set enable-bracketed-paste Off
 
 # }}}
